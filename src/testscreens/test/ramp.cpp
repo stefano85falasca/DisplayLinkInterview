@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+// One colour per pixel
 TEST(Ramp, OnePerPixel) {
   using namespace TestScreens;
   {
@@ -56,6 +57,7 @@ TEST(Ramp, OnePerPixel) {
   }
 }
 
+// More colours than pixels
 TEST(Ramp, Tall) {
   using namespace TestScreens;
 
@@ -113,5 +115,31 @@ TEST(Ramp, Tall) {
 
     EXPECT_EQ(Green{0u}.value, TestScreens::colour(first, last, 4, 3).green().value);
     EXPECT_EQ(Red{}.value, TestScreens::colour(first, last, 4, 3).red().value);
+  }
+}
+
+// More pixels than colours
+TEST(Ramp, Fat) {
+  using namespace TestScreens;
+
+  {
+    const auto first = RGB565{Red{0u}, Green{}, Blue{0u}};
+    const auto last = RGB565{Red{0u}, Green{}, Blue{0u}};
+
+    for(auto i = 0u; i < 10u; ++i) {
+      EXPECT_EQ(Red{0u}.value, TestScreens::colour(first, last, 10, i).red().value);
+      EXPECT_EQ(Green{}.value, TestScreens::colour(first, last, 10, i).green().value);
+      EXPECT_EQ(Blue{0u}.value, TestScreens::colour(first, last, 10, i).blue().value);
+    }
+  }
+  {
+    const auto first = RGB565{Red{0u}, Green{}, Blue{0u}};
+    const auto last = RGB565{Red{0u}, Green{}, Blue{0u}};
+
+    for(auto i = 0u; i < 9u; ++i) {
+      EXPECT_EQ(Red{0u}.value, TestScreens::colour(first, last, 9, i).red().value);
+      EXPECT_EQ(Green{}.value, TestScreens::colour(first, last, 9, i).green().value);
+      EXPECT_EQ(Blue{0u}.value, TestScreens::colour(first, last, 9, i).blue().value);
+    }
   }
 }
