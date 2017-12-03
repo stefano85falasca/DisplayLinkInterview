@@ -195,7 +195,7 @@ RGB565 colour(RGB565 first, RGB565 last, int total, int coordinate) {
 
   // make sure that the last-point are satisfied
   assert_safe(coordinate != 0 || first.value == RGB565{red, green, blue}.value);
-  assert_safe(coordinate != total - 1 ||
+  assert_safe(coordinate != total - 1  || total == 1 ||
               last.value == RGB565{red, green, blue}.value);
 
   return {red, green, blue};

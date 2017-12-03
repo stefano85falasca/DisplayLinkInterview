@@ -55,3 +55,63 @@ TEST(Ramp, OnePerPixel) {
     }
   }
 }
+
+TEST(Ramp, Tall) {
+  using namespace TestScreens;
+
+  {
+    const auto first = RGB565{Red{0u}, Green{0u}, Blue{0u}};
+    const auto last = RGB565{Red{0u}, Green{0u}, Blue{}};
+
+    EXPECT_EQ(0u, TestScreens::colour(first, last, 1, 0).blue().value);
+  }
+  {
+    const auto first = RGB565{Red{0u}, Green{0u}, Blue{}};
+    const auto last = RGB565{Red{0u}, Green{0u}, Blue{0u}};
+
+    EXPECT_EQ(Blue{}.value, TestScreens::colour(first, last, 1, 0).blue().value);
+  }
+  {
+    const auto first = RGB565{Red{0u}, Green{}, Blue{0u}};
+    const auto last = RGB565{Red{0u}, Green{0u}, Blue{0u}};
+
+    EXPECT_EQ(Green{}.value, TestScreens::colour(first, last, 3, 0).green().value);
+    EXPECT_GE(Green{}.value, TestScreens::colour(first, last, 3, 1).green().value);
+    EXPECT_EQ(Green{0u}.value, TestScreens::colour(first, last, 3, 2).green().value);
+  }
+  {
+    const auto first = RGB565{Red{0u}, Green{}, Blue{0u}};
+    const auto last = RGB565{Red{}, Green{0u}, Blue{0u}};
+
+    EXPECT_EQ(Green{}.value, TestScreens::colour(first, last, 3, 0).green().value);
+    EXPECT_EQ(Red{0u}.value, TestScreens::colour(first, last, 3, 0).red().value);
+
+    EXPECT_GE(Green{}.value, TestScreens::colour(first, last, 3, 1).green().value);
+    EXPECT_LE(Green{0u}.value, TestScreens::colour(first, last, 3, 1).green().value);
+    EXPECT_LE(Red{0u}.value, TestScreens::colour(first, last, 3, 1).red().value);
+    EXPECT_GE(Red{}.value, TestScreens::colour(first, last, 3, 1).red().value);
+
+    EXPECT_EQ(Green{0u}.value, TestScreens::colour(first, last, 3, 2).green().value);
+    EXPECT_EQ(Red{}.value, TestScreens::colour(first, last, 3, 2).red().value);
+  }
+  {
+    const auto first = RGB565{Red{0u}, Green{}, Blue{0u}};
+    const auto last = RGB565{Red{}, Green{0u}, Blue{0u}};
+
+    EXPECT_EQ(Green{}.value, TestScreens::colour(first, last, 4, 0).green().value);
+    EXPECT_EQ(Red{0u}.value, TestScreens::colour(first, last, 4, 0).red().value);
+
+    EXPECT_GE(Green{}.value, TestScreens::colour(first, last, 4, 1).green().value);
+    EXPECT_LE(Green{0u}.value, TestScreens::colour(first, last, 4, 1).green().value);
+    EXPECT_LE(Red{0u}.value, TestScreens::colour(first, last, 4, 1).red().value);
+    EXPECT_GE(Red{}.value, TestScreens::colour(first, last, 4, 1).red().value);
+
+    EXPECT_GE(Green{}.value, TestScreens::colour(first, last, 4, 2).green().value);
+    EXPECT_LE(Green{0u}.value, TestScreens::colour(first, last, 4, 2).green().value);
+    EXPECT_LE(Red{0u}.value, TestScreens::colour(first, last, 4, 2).red().value);
+    EXPECT_GE(Red{}.value, TestScreens::colour(first, last, 4, 2).red().value);
+
+    EXPECT_EQ(Green{0u}.value, TestScreens::colour(first, last, 4, 3).green().value);
+    EXPECT_EQ(Red{}.value, TestScreens::colour(first, last, 4, 3).red().value);
+  }
+}
