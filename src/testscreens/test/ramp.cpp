@@ -7,6 +7,20 @@
 // One colour per pixel
 TEST(Ramp, OnePerPixel) {
   using namespace TestScreens;
+
+  {
+    const auto first = RGB565{Red{0u}, Green{0u}, Blue{0u}};
+    const auto last = RGB565{Red{0u}, Green{0u}, Blue{0u}};
+
+    EXPECT_EQ(0u, TestScreens::colour(first, last, 1, 0).blue().value);
+  }
+  {
+    const auto first = RGB565{Red{0u}, Green{0u}, Blue{0u}};
+    const auto last = RGB565{Red{0u}, Green{0u}, Blue{1u}};
+
+    EXPECT_EQ(0u, TestScreens::colour(first, last, 2, 0).blue().value);
+    EXPECT_EQ(1u, TestScreens::colour(first, last, 2, 1).blue().value);
+  }
   {
     const auto first = RGB565{Red{0u}, Green{0u}, Blue{0u}};
     const auto last = RGB565{Red{}, Green{0u}, Blue{0u}};
