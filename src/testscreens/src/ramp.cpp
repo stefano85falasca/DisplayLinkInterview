@@ -47,7 +47,7 @@ int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
     if (yZones.middle) {
       return *(yZones.middle);
     }
-    return yZones.head.second;
+    return yZones.head.second - 1;
   }
 
   const auto xZones = Zones(xRange);
@@ -56,7 +56,7 @@ int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
   }
   if (xZones.middle && x == *(xZones.middle)) {
     if (boost::none == yZones.middle) {
-      return compute({x, x + 1}, yZones.head, x);
+      return yZones.head.second - 1;
     }
     return *(yZones.middle);
   }
@@ -91,7 +91,6 @@ DisplayNS::RGB565 colour(DisplayNS::RGB565 start, DisplayNS::RGB565 end,
   auto green = ::colour(start.green(), end.green(), total, coordinate);
   auto blue = ::colour(start.blue(), end.blue(), total, coordinate);
 
-#if 0
   assert_safe(
       0 == coordinate ||
       (abs(end.red().value - red.value) <=
@@ -102,7 +101,58 @@ DisplayNS::RGB565 colour(DisplayNS::RGB565 start, DisplayNS::RGB565 end,
       (abs(end.red().value - red.value) >=
        abs(end.red().value -
            ::colour(start.red(), end.red(), total, coordinate + 1).value)));
-#endif
+  assert_safe(
+      0 == coordinate ||
+      (abs(start.red().value - red.value) >=
+       abs(start.red().value -
+           ::colour(start.red(), end.red(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(start.red().value - red.value) <=
+       abs(start.red().value -
+           ::colour(start.red(), end.red(), total, coordinate + 1).value)));
+
+  assert_safe(
+      0 == coordinate ||
+      (abs(end.green().value - green.value) <=
+       abs(end.green().value -
+           ::colour(start.green(), end.green(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(end.green().value - green.value) >=
+       abs(end.green().value -
+           ::colour(start.green(), end.green(), total, coordinate + 1).value)));
+  assert_safe(
+      0 == coordinate ||
+      (abs(start.green().value - green.value) >=
+       abs(start.green().value -
+           ::colour(start.green(), end.green(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(start.green().value - green.value) <=
+       abs(start.green().value -
+           ::colour(start.green(), end.green(), total, coordinate + 1).value)));
+
+  assert_safe(
+      0 == coordinate ||
+      (abs(end.blue().value - blue.value) <=
+       abs(end.blue().value -
+           ::colour(start.blue(), end.blue(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(end.blue().value - blue.value) >=
+       abs(end.blue().value -
+           ::colour(start.blue(), end.blue(), total, coordinate + 1).value)));
+  assert_safe(
+      0 == coordinate ||
+      (abs(start.blue().value - blue.value) >=
+       abs(start.blue().value -
+           ::colour(start.blue(), end.blue(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(start.blue().value - blue.value) <=
+       abs(start.blue().value -
+           ::colour(start.blue(), end.blue(), total, coordinate + 1).value)));
 
   return {red, green, blue};
 }
