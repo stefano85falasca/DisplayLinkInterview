@@ -47,7 +47,7 @@ int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
     if (yZones.middle) {
       return *(yZones.middle);
     }
-    return compute(xRange, yZones.head, x);
+    return yZones.head.second;
   }
 
   const auto xZones = Zones(xRange);
@@ -68,10 +68,18 @@ template <typename C> C colour(C start, C end, int total, int coordinate) {
   assert_opt(coordinate >= 0);
   assert_opt(coordinate < total);
 
-  if(start.value > end.value) {
-    return C(compute({0, total + 1}, {end.value, start.value + 1}, total - coordinate));
+  if (0 == coordinate) {
+    return start;
   }
-  return C(compute({0, total + 1}, {start.value, end.value + 1}, coordinate));
+  if (total - 1 == coordinate) {
+    return end;
+  }
+
+  if (start.value > end.value) {
+    return C(compute({0, total}, {end.value, start.value + 1},
+                     total - 1 - coordinate));
+  }
+  return C(compute({0, total}, {start.value, end.value + 1}, coordinate));
 }
 }
 
@@ -82,6 +90,20 @@ DisplayNS::RGB565 colour(DisplayNS::RGB565 start, DisplayNS::RGB565 end,
   auto red = ::colour(start.red(), end.red(), total, coordinate);
   auto green = ::colour(start.green(), end.green(), total, coordinate);
   auto blue = ::colour(start.blue(), end.blue(), total, coordinate);
+
+#if 0
+  assert_safe(
+      0 == coordinate ||
+      (abs(end.red().value - red.value) <=
+       abs(end.red().value -
+           ::colour(start.red(), end.red(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(end.red().value - red.value) >=
+       abs(end.red().value -
+           ::colour(start.red(), end.red(), total, coordinate + 1).value)));
+#endif
+
   return {red, green, blue};
 }
 }

@@ -1,5 +1,6 @@
 #include "display/colours.h"
 #include "common/assert.h"
+#include <iomanip>
 #include <limits>
 
 namespace DisplayNS {
@@ -26,10 +27,13 @@ Blue RGB565::blue() const {
   return Blue{static_cast<uint_fast8_t>(~(0xf800 | 0x07e0) & value)};
 }
 std::ostream &operator<<(std::ostream &out, RGB565 colour) {
-  auto r = ((colour.red().value * 255) / 31) - 4;
-  auto g = ((colour.green().value * 255) / 63) - 2;
-  auto b = ((colour.blue().value * 255) / 31) - 4;
-  out << "\033[38;2;" << r << ';' << g << ';' << b << "m" << 'x';
+  auto r = ((colour.red().value * 255) / 31);
+  auto g = ((colour.green().value * 255) / 63);
+  auto b = ((colour.blue().value * 255) / 31);
+  out << "\033[38;2;" << r << ';' << g << ';' << b << "m" << std::setw(2)
+      << int(colour.red().value) << '-' << std::setw(2)
+      << int(colour.green().value) << '-' << std::setw(2)
+      << int(colour.blue().value) << '|';
   return out;
 }
 }

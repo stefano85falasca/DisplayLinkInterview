@@ -5,17 +5,17 @@
 
 namespace DisplayNS {
 struct Red {
-  explicit Red(unsigned int = 0xf800u);
+  explicit Red(unsigned int = 31u);
   uint_fast8_t value;
   ~Red();
 };
 struct Green {
-  explicit Green(unsigned int = 0x07e0u);
+  explicit Green(unsigned int = 63u);
   uint_fast8_t value;
   ~Green();
 };
 struct Blue {
-  explicit Blue(unsigned int = 0x001fu);
+  explicit Blue(unsigned int = 31u);
   uint_fast8_t value;
   ~Blue();
 };
