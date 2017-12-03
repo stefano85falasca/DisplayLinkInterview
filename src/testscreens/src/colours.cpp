@@ -29,7 +29,7 @@ std::ostream &operator<<(std::ostream &out, RGB565 colour) {
   auto r = ((colour.red().value * 255) / 31);
   auto g = ((colour.green().value * 255) / 63);
   auto b = ((colour.blue().value * 255) / 31);
-  out << "\033[38;2;" << r << ';' << g << ';' << b << "mx";
+  out << "\033[48;2;" << r << ';' << g << ';' << b << "m ";
   return out;
 }
 }

@@ -4,8 +4,8 @@
 #include <cstring>
 #include <memory>
 
-#define W 80
-#define H 20
+#define W 100
+#define H 40
 
 static unsigned short frame_buffer[W * H];
 

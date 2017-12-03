@@ -1,4 +1,4 @@
-#include "testscreens/testscreens.h"
+#include "testscreens/ramp.h"
 
 #include "gtest/gtest.h"
 
