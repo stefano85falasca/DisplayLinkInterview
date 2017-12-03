@@ -58,13 +58,13 @@ parse(const std::string &source) {
     return parsingResult;
   }
   std::stringstream error;
-  error << "Invalid parameters: \"" << source << '"';
+  error << R"(Invalid parameters: ")" << source << '"';
   throw std::runtime_error{error.str()};
   ;
 }
 
 void help() { std::cout << "Usage: ramp display tl tr [bl] [br]" << std::endl; }
-}
+} // namespace
 
 int main(int ac, const char *av[]) {
   {
@@ -91,7 +91,7 @@ int main(int ac, const char *av[]) {
     const auto &displayName = std::get<0>(parsedParameters);
     if (!display.connect(displayName.c_str())) {
       std::stringstream ss;
-      ss << "Cannot connect to the display named \"" << displayName << '"';
+      ss << R"(Cannot connect to the display named ")" << displayName << '"';
       throw std::runtime_error{ss.str()};
     }
     const auto size = [&display]() {

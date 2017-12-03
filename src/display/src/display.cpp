@@ -26,7 +26,7 @@ Display::~Display() {
 #endif
 }
 
-bool Display::connect(const char *display_name) { return true; }
+bool Display::connect(const char * /*display_name*/) { return true; }
 
 void Display::get_size(int &width, int &height) {
   width = W;

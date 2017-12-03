@@ -32,4 +32,4 @@ std::ostream &operator<<(std::ostream &out, RGB565 colour) {
   out << "\033[48;2;" << r << ';' << g << ';' << b << "m ";
   return out;
 }
-}
+} // namespace TestScreens

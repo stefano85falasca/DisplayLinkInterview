@@ -121,7 +121,7 @@ template <typename C> C colour(C first, C last, int total, int coordinate) {
   }
   return C(compute({0, total}, {first.value, last.value + 1}, coordinate));
 }
-}
+} // namespace
 
 namespace TestScreens {
 RGB565 colour(RGB565 first, RGB565 last, int total, int coordinate) {
@@ -200,4 +200,4 @@ RGB565 colour(RGB565 first, RGB565 last, int total, int coordinate) {
 
   return {red, green, blue};
 }
-}
+} // namespace TestScreens
