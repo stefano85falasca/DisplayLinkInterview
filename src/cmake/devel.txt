@@ -1,0 +1,5 @@
+set(CMAKE_BUILD_TYPE "DEVEL" CACHE STRING "build type")
+set(ASSERT_LEVEL "SAFE" CACHE STRING "assert level - NONE, SAFE, NORMAL, OPT")
+set(PEDANTIC "True" CACHE BOOL "be pedantic and use Wall")
+set(SANITIZE "NONE" CACHE STRING "sanitizers - NONE, ADDRESS, UNDEFINED, THREAD")
+set(OPTIMIZE "True" CACHE BOOL "optimize")
