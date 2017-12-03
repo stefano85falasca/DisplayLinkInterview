@@ -1,44 +1,77 @@
 #include "common/assert.h"
 #include "testscreens/testscreens.h"
+#include <array>
+#include <boost/optional.hpp>
 #include <iostream>
 #include <limits>
+#include <utility>
 
 namespace {
-int drawline(int x0, int y0, const int x1, const int y1, const int current) {
-  assert_opt(x0 <= current);
-  assert_opt(current <= x1);
+struct Zones {
+  explicit Zones(std::pair<int, int> range) {
+    assert_opt_message(range.first < range.second,
+                       "first: " << range.first << " second: " << range.second);
 
-  auto dx = abs(x1 - x0);
-  auto sx = x0 < x1 ? 1 : -1;
-  auto dy = abs(y1 - y0);
-  auto sy = y0 < y1 ? 1 : -1;
-  int err = (dx > dy ? dx : -dy) / 2, e2;
+    const auto first = range.first;
+    const auto last = range.second - 1;
 
-  for (;;) {
-    if (x0 == x1 && y0 == y1)
-      return y1;
-    e2 = err;
-    if (e2 > -dx) {
-      if (current == x0) {
-        return y0;
-      }
-      err -= dy;
-      x0 += sx;
-    }
-    if (e2 < dy) {
-      err += dx;
-      y0 += sy;
+    head = {first, first + 1 + (last - first - 1) / 2};
+    tail = {head.second, range.second};
+    if (0 == (last - first) % 2) {
+      middle = head.second;
+      ++(tail.first);
     }
   }
-  return y1;
+  std::pair<int, int> head;
+  boost::optional<int> middle = boost::none;
+  std::pair<int, int> tail;
+
+  ~Zones() {
+    assert_opt(head.first < head.second);
+    assert_opt(boost::none == middle || head.second == *middle);
+    assert_opt(tail.first < tail.second);
+  }
+};
+
+int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
+            const int x) {
+  assert_opt(xRange.first <= x);
+  assert_opt(x < xRange.second);
+
+  if (yRange.first + 1 == yRange.second) {
+    return yRange.first;
+  }
+
+  const auto yZones = Zones(yRange);
+  if (xRange.first + 1 == xRange.second) {
+    if (yZones.middle) {
+      return *(yZones.middle);
+    }
+    return compute(xRange, yZones.head, x);
+  }
+
+  const auto xZones = Zones(xRange);
+  if (x < xZones.head.second) {
+    return compute(xZones.head, yZones.head, x);
+  }
+  if (xZones.middle && x == *(xZones.middle)) {
+    if (boost::none == yZones.middle) {
+      return compute({x, x + 1}, yZones.head, x);
+    }
+    return *(yZones.middle);
+  }
+  assert_opt(xZones.tail.first <= x);
+  return compute(xZones.tail, yZones.tail, x);
 }
 
 template <typename C> C colour(C start, C end, int total, int coordinate) {
+  assert_opt(coordinate >= 0);
   assert_opt(coordinate < total);
-  assert_opt(total > 0);
-  assert_opt(coordinate > 0);
 
-  return C(drawline(0, start.value, total, end.value, coordinate));
+  if(start.value > end.value) {
+    return C(compute({0, total + 1}, {end.value, start.value + 1}, total - coordinate));
+  }
+  return C(compute({0, total + 1}, {start.value, end.value + 1}, coordinate));
 }
 }
 
