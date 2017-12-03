@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdint.h>
 
-namespace DisplayNS {
+namespace TestScreens {
 struct Red {
   explicit Red(unsigned int = 31u);
   uint_fast8_t value;

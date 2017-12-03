@@ -5,7 +5,7 @@
 #include <iostream>
 
 TEST(Ramp, OnePerPixel) {
-  using namespace DisplayNS;
+  using namespace TestScreens;
   {
     const auto first = RGB565{Red{0u}, Green{0u}, Blue{0u}};
     const auto last = RGB565{Red{}, Green{0u}, Blue{0u}};

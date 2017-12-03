@@ -1,6 +1,6 @@
 #include "common/assert.h"
-#include "display/colours.h"
 #include "display/display.h"
+#include "testscreens/colours.h"
 #include "testscreens/testscreens.h"
 #include <boost/spirit/home/qi.hpp>
 #include <iostream>
@@ -16,9 +16,9 @@ struct ParametersGrammar
     using boost::spirit::qi::eoi;
     using boost::spirit::qi::lit;
     using boost::spirit::lexeme;
-    number_ =
-        lexeme[(lit("0X") | lit("0x")) >> boost::spirit::qi::uint_parser<uint16_t, 16>{}] |
-        boost::spirit::qi::uint_parser<uint16_t>{};
+    number_ = lexeme[(lit("0X") | lit("0x")) >>
+                     boost::spirit::qi::uint_parser<uint16_t, 16>{}] |
+              boost::spirit::qi::uint_parser<uint16_t>{};
     params_ = number_ >> number_ >> -number_ >> -number_ >> eoi;
   }
 
@@ -68,12 +68,12 @@ int main(int ac, const char *av[]) {
   std::cout << std::endl;
   std::cout << std::endl;
   assert_normal((corners.size() >= 2) && (corners.size() <= 4));
-  const auto tl = DisplayNS::RGB565{corners[0]};
-  const auto tr = DisplayNS::RGB565{corners[1]};
+  const auto tl = TestScreens::RGB565{corners[0]};
+  const auto tr = TestScreens::RGB565{corners[1]};
   const auto bl =
-      DisplayNS::RGB565{corners.size() > 2 ? corners[2] : corners[0]};
+      TestScreens::RGB565{corners.size() > 2 ? corners[2] : corners[0]};
   const auto br =
-      DisplayNS::RGB565{corners.size() > 3 ? corners[3] : corners[1]};
+      TestScreens::RGB565{corners.size() > 3 ? corners[3] : corners[1]};
 
   auto display = Display{};
   const auto size = [&display]() {
@@ -93,7 +93,7 @@ int main(int ac, const char *av[]) {
     }
     std::cout << std::endl;
   }
-  std::cout << DisplayNS::RGB565{0xffff} << std::endl;
+  std::cout << TestScreens::RGB565{0xffff} << std::endl;
 
   return 1;
 }

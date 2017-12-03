@@ -1,6 +1,6 @@
 project(tslib VERSION 0.1 LANGUAGES CXX)
 
-add_library(tslib src/ramp.cpp)
+add_library(tslib src/ramp.cpp src/colours.cpp)
 target_link_libraries(tslib common display)
 add_sanitizers(tslib)
 add_definitions(-std=c++14 -Wall --pedantic -Werror)
@@ -17,7 +17,7 @@ install(DIRECTORY include/ DESTINATION include)
 
 export(TARGETS tslib FILE TslibLibraryConfig.cmake)
 
-add_executable(testtslib test/main.cpp test/ramp.cpp)
+add_executable(testtslib test/main.cpp test/ramp.cpp test/colours.cpp)
 add_sanitizers(testtslib)
 
 target_include_directories(

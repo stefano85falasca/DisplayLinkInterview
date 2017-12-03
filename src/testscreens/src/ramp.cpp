@@ -122,9 +122,7 @@ template <typename C> C colour(C start, C end, int total, int coordinate) {
 }
 
 namespace TestScreens {
-DisplayNS::RGB565 colour(DisplayNS::RGB565 start, DisplayNS::RGB565 end,
-                         int total, int coordinate) {
-  using namespace DisplayNS;
+RGB565 colour(RGB565 start, RGB565 end, int total, int coordinate) {
   auto red = ::colour(start.red(), end.red(), total, coordinate);
   auto green = ::colour(start.green(), end.green(), total, coordinate);
   auto blue = ::colour(start.blue(), end.blue(), total, coordinate);
@@ -194,10 +192,9 @@ DisplayNS::RGB565 colour(DisplayNS::RGB565 start, DisplayNS::RGB565 end,
            ::colour(start.blue(), end.blue(), total, coordinate + 1).value)));
 
   // make sure that the end-point are satisfied
-  assert_safe(coordinate != 0 ||
-              start.value == DisplayNS::RGB565{red, green, blue}.value);
+  assert_safe(coordinate != 0 || start.value == RGB565{red, green, blue}.value);
   assert_safe(coordinate != total - 1 ||
-              end.value == DisplayNS::RGB565{red, green, blue}.value);
+              end.value == RGB565{red, green, blue}.value);
 
   return {red, green, blue};
 }

@@ -1,8 +1,8 @@
-#include "display/colours.h"
+#include "testscreens/colours.h"
 #include "common/assert.h"
 #include <limits>
 
-namespace DisplayNS {
+namespace TestScreens {
 Red::Red(unsigned int v) : value{static_cast<decltype(value)>(v)} {}
 Red::~Red() { assert_opt(value < 32u); }
 

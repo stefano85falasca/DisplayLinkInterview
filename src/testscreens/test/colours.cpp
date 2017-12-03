@@ -1,9 +1,9 @@
-#include "display/colours.h"
+#include "testscreens/colours.h"
 
 #include "gtest/gtest.h"
 
 TEST(RGB565, Gets) {
-  using namespace DisplayNS;
+  using namespace TestScreens;
 
   for (auto r = 0u; r < 32u; ++r) {
     for (auto g = 0u; g < 64u; ++g) {

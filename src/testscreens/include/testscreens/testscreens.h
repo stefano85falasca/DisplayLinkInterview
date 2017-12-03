@@ -1,8 +1,7 @@
 #pragma once
 
-#include "display/colours.h"
+#include "testscreens/colours.h"
 
 namespace TestScreens {
-DisplayNS::RGB565 colour(DisplayNS::RGB565 first, DisplayNS::RGB565 last,
-                         int total, int coordinate);
+RGB565 colour(RGB565 first, RGB565 last, int total, int coordinate);
 }
