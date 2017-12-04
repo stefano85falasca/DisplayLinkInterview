@@ -22,3 +22,13 @@ Several test programs are generated during build
 Normal defensive programming techniques have been used throughout.
 
 Assertions are used to perform sanity checking of the computations at various stages.
+
+Modules
+======
+This is a contrived example that maybe didn't need dividing in modules, but I did.
+
+* display - library providing the Display class
+* common - library providing assertions
+* testscreens - library providing the ramp generation facilities
+* ramp - executable
+* truecolour - executable used for prettyprenting on a true-color console
