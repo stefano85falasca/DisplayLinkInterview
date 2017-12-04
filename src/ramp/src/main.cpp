@@ -108,9 +108,7 @@ int main(int ac, const char *av[]) {
       for (auto x = 0; x < size.first; ++x) {
         const auto colour = TestScreens::colour(l, r, size.first, x).value;
         display.draw_raster(x, y, &colour, 1);
-        std::cout << TestScreens::colour(l, r, size.first, x);
       }
-      std::cout << TestScreens::RGB565{0x0000} << std::endl;
     }
 
     return 1;

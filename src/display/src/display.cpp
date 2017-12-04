@@ -4,7 +4,7 @@
 #include <cstring>
 #include <memory>
 
-#define W 100
+#define W 16
 #define H 40
 
 static unsigned short frame_buffer[W * H];
@@ -12,7 +12,6 @@ static unsigned short frame_buffer[W * H];
 Display::Display() { memset(frame_buffer, 0, sizeof(frame_buffer)); }
 
 Display::~Display() {
-#if 0
   unsigned short *pix = frame_buffer;
   for (int y = 0; y < H; y++) {
     for (int x = 0; x < W; x++) {
@@ -23,7 +22,6 @@ Display::~Display() {
     }
     printf("\n");
   }
-#endif
 }
 
 bool Display::connect(const char * /*display_name*/) { return true; }
