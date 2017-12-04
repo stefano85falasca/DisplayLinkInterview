@@ -31,4 +31,3 @@ This is a contrived example that maybe didn't need dividing in modules, but I di
 * common - library providing assertions
 * testscreens - library providing the ramp generation facilities
 * ramp - executable
-* truecolour - executable used for prettyprenting on a true-color console
