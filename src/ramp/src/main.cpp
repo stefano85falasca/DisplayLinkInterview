@@ -3,7 +3,7 @@
 #include "testscreens/colours.h"
 #include "testscreens/ramp.h"
 #include <boost/fusion/adapted/std_tuple.hpp>
-#include <boost/spirit/home/qi.hpp>
+#include "boost/spirit/home/qi.hpp"
 #include <iostream>
 #include <limits>
 #include <sstream>
