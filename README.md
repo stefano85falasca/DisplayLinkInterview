@@ -8,8 +8,8 @@ Usage
 ======
 * clone
 * update submodules with `git submodule update --init --recursive`
-* have cmake generate the build system
-  * initial caches can be found, if desired, in src/cmake
+* have cmake generate the build system, e.g. `cmake /path/to/src`
+  * initial caches can be found, if desired, in src/cmake, e.g. `cmake -C /path/to/src/cmake/release.txt /path/to/src`
 * compile
 
 Testing
