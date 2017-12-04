@@ -9,7 +9,7 @@ Usage
 * clone
 * update submodules with `git submodule update --init --recursive`
 * have cmake generate the build system
-** initial caches can be found, if desired, in src/cmake
+  * initial caches can be found, if desired, in src/cmake
 * compile
 
 Testing
