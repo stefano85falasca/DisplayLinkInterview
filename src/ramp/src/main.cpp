@@ -60,7 +60,6 @@ parse(const std::string &source) {
   std::stringstream error;
   error << R"(Invalid parameters: ")" << source << '"';
   throw std::runtime_error{error.str()};
-  ;
 }
 
 void help() { std::cout << "Usage: ramp display tl tr [bl] [br]" << std::endl; }
@@ -94,13 +93,13 @@ int main(int ac, const char *av[]) {
       ss << R"(Cannot connect to the display named ")" << displayName << '"';
       throw std::runtime_error{ss.str()};
     }
-    const auto size = [&display]() {
+    const auto size = [&display]() -> std::pair<int, int> {
       int width = 0;
       int height = 0;
       display.get_size(width, height);
       assert_opt(width > 0);
       assert_opt(height > 0);
-      return std::pair<int, int>{width, height};
+      return {width, height};
     }();
 
     for (auto y = 0; y < size.second; ++y) {
