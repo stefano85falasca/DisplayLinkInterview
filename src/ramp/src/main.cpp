@@ -3,7 +3,7 @@
 #include "testscreens/colours.h"
 #include "testscreens/ramp.h"
 #include <boost/fusion/adapted/std_tuple.hpp>
-#include "boost/spirit/home/qi.hpp"
+#include <boost/spirit/home/qi.hpp>
 #include <iostream>
 #include <limits>
 #include <sstream>
@@ -11,6 +11,7 @@
 #include <string>
 #include <tuple>
 
+namespace {
 template <typename Iterator>
 struct ParametersGrammar
     : boost::spirit::qi::grammar<Iterator,
@@ -41,7 +42,6 @@ private:
       params_;
 };
 
-namespace {
 std::tuple<std::string, std::vector<uint16_t>>
 parse(const std::string &source) {
   using iterator_type = std::string::const_iterator;
@@ -116,7 +116,7 @@ int main(int ac, const char *av[]) {
     std::cout << e.what() << std::endl;
     help();
   } catch (std::exception &e) {
-    std::cout << "An unhandled error occourred:\n\t" << e.what()
+    std::cout << "An unhandled error occurred:\n\t" << e.what()
               << "\nterminating" << std::endl;
   }
   return 0;
