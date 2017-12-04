@@ -103,10 +103,10 @@ int main(int ac, const char *av[]) {
     }();
 
     for (auto y = 0; y < size.second; ++y) {
-      const auto l = TestScreens::colour(tl, bl, size.second, y);
-      const auto r = TestScreens::colour(tr, br, size.second, y);
+      const auto l = TestScreens::ramp(tl, bl, size.second, y);
+      const auto r = TestScreens::ramp(tr, br, size.second, y);
       for (auto x = 0; x < size.first; ++x) {
-        const auto colour = TestScreens::colour(l, r, size.first, x).value;
+        const auto colour = TestScreens::ramp(l, r, size.first, x).value;
         display.draw_raster(x, y, &colour, 1);
       }
     }

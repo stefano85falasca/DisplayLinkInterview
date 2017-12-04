@@ -102,7 +102,7 @@ int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
   return compute(xZones.tail, yZones.tail, x);
 }
 
-template <typename C> C colour(C first, C last, int total, int coordinate) {
+template <typename C> C ramp(C first, C last, int total, int coordinate) {
   assert_opt(coordinate >= 0);
   assert_opt(coordinate < total);
 
@@ -124,78 +124,78 @@ template <typename C> C colour(C first, C last, int total, int coordinate) {
 } // namespace
 
 namespace TestScreens {
-RGB565 colour(RGB565 first, RGB565 last, int total, int coordinate) {
-  auto red = ::colour(first.red(), last.red(), total, coordinate);
-  auto green = ::colour(first.green(), last.green(), total, coordinate);
-  auto blue = ::colour(first.blue(), last.blue(), total, coordinate);
+RGB565 ramp(RGB565 first, RGB565 last, int total, int coordinate) {
+  auto red = ::ramp(first.red(), last.red(), total, coordinate);
+  auto green = ::ramp(first.green(), last.green(), total, coordinate);
+  auto blue = ::ramp(first.blue(), last.blue(), total, coordinate);
 
   // make sure that colours move in the right direction
   assert_safe(
       0 == coordinate ||
       (abs(last.red().value - red.value) <=
        abs(last.red().value -
-           ::colour(first.red(), last.red(), total, coordinate - 1).value)));
+           ::ramp(first.red(), last.red(), total, coordinate - 1).value)));
   assert_safe(
       total - 1 == coordinate ||
       (abs(last.red().value - red.value) >=
        abs(last.red().value -
-           ::colour(first.red(), last.red(), total, coordinate + 1).value)));
+           ::ramp(first.red(), last.red(), total, coordinate + 1).value)));
   assert_safe(
       0 == coordinate ||
       (abs(first.red().value - red.value) >=
        abs(first.red().value -
-           ::colour(first.red(), last.red(), total, coordinate - 1).value)));
+           ::ramp(first.red(), last.red(), total, coordinate - 1).value)));
   assert_safe(
       total - 1 == coordinate ||
       (abs(first.red().value - red.value) <=
        abs(first.red().value -
-           ::colour(first.red(), last.red(), total, coordinate + 1).value)));
+           ::ramp(first.red(), last.red(), total, coordinate + 1).value)));
 
-  assert_safe(0 == coordinate ||
-              (abs(last.green().value - green.value) <=
-               abs(last.green().value -
-                   ::colour(first.green(), last.green(), total, coordinate - 1)
-                       .value)));
-  assert_safe(total - 1 == coordinate ||
-              (abs(last.green().value - green.value) >=
-               abs(last.green().value -
-                   ::colour(first.green(), last.green(), total, coordinate + 1)
-                       .value)));
-  assert_safe(0 == coordinate ||
-              (abs(first.green().value - green.value) >=
-               abs(first.green().value -
-                   ::colour(first.green(), last.green(), total, coordinate - 1)
-                       .value)));
-  assert_safe(total - 1 == coordinate ||
-              (abs(first.green().value - green.value) <=
-               abs(first.green().value -
-                   ::colour(first.green(), last.green(), total, coordinate + 1)
-                       .value)));
+  assert_safe(
+      0 == coordinate ||
+      (abs(last.green().value - green.value) <=
+       abs(last.green().value -
+           ::ramp(first.green(), last.green(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(last.green().value - green.value) >=
+       abs(last.green().value -
+           ::ramp(first.green(), last.green(), total, coordinate + 1).value)));
+  assert_safe(
+      0 == coordinate ||
+      (abs(first.green().value - green.value) >=
+       abs(first.green().value -
+           ::ramp(first.green(), last.green(), total, coordinate - 1).value)));
+  assert_safe(
+      total - 1 == coordinate ||
+      (abs(first.green().value - green.value) <=
+       abs(first.green().value -
+           ::ramp(first.green(), last.green(), total, coordinate + 1).value)));
 
   assert_safe(
       0 == coordinate ||
       (abs(last.blue().value - blue.value) <=
        abs(last.blue().value -
-           ::colour(first.blue(), last.blue(), total, coordinate - 1).value)));
+           ::ramp(first.blue(), last.blue(), total, coordinate - 1).value)));
   assert_safe(
       total - 1 == coordinate ||
       (abs(last.blue().value - blue.value) >=
        abs(last.blue().value -
-           ::colour(first.blue(), last.blue(), total, coordinate + 1).value)));
+           ::ramp(first.blue(), last.blue(), total, coordinate + 1).value)));
   assert_safe(
       0 == coordinate ||
       (abs(first.blue().value - blue.value) >=
        abs(first.blue().value -
-           ::colour(first.blue(), last.blue(), total, coordinate - 1).value)));
+           ::ramp(first.blue(), last.blue(), total, coordinate - 1).value)));
   assert_safe(
       total - 1 == coordinate ||
       (abs(first.blue().value - blue.value) <=
        abs(first.blue().value -
-           ::colour(first.blue(), last.blue(), total, coordinate + 1).value)));
+           ::ramp(first.blue(), last.blue(), total, coordinate + 1).value)));
 
   // make sure that the last-point are satisfied
   assert_safe(coordinate != 0 || first.value == RGB565{red, green, blue}.value);
-  assert_safe(coordinate != total - 1  || total == 1 ||
+  assert_safe(coordinate != total - 1 || total == 1 ||
               last.value == RGB565{red, green, blue}.value);
 
   return {red, green, blue};

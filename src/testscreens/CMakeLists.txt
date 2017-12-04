@@ -3,7 +3,7 @@ project(tslib VERSION 0.1 LANGUAGES CXX)
 add_library(tslib src/ramp.cpp src/colours.cpp)
 target_link_libraries(tslib common display)
 add_sanitizers(tslib)
-add_definitions(-std=c++14 -Wall --pedantic -Werror)
+add_definitions(-std=c++11 -Wall --pedantic -Werror)
 
 target_include_directories(
   tslib PUBLIC

@@ -3,7 +3,7 @@ project(display VERSION 0.1 LANGUAGES CXX)
 add_library(display src/display.cpp)
 target_link_libraries(display common)
 add_sanitizers(display)
-add_definitions(-std=c++14 -Wall --pedantic -Werror)
+add_definitions(-std=c++11 -Wall --pedantic -Werror)
  
 target_include_directories(display PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

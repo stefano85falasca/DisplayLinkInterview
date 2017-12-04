@@ -2,7 +2,7 @@ project(commonlib VERSION 0.1 LANGUAGES CXX)
 
 add_library(common src/assert.cpp)
 add_sanitizers(common)
-add_definitions(-std=c++14 -Wall -Werror -pedantic)
+add_definitions(-std=c++11 -Wall -Werror -pedantic)
 
 target_include_directories(common PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
