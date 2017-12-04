@@ -18,3 +18,7 @@ Several test programs are generated during build
 * testcommonlib
 * testtslib
 * testcommon
+
+Normal defensive programming techniques have been used throughout.
+
+Assertions are used to perform sanity checking of the computations at various stages.
