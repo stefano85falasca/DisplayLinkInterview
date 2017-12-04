@@ -85,7 +85,7 @@ int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
   if (x < xZones.head.second) {
     // x in the head of the x range corresponds to a value for y in the head of
     // the y range
-    return compute(xZones.head, yZones.head, x);
+    return compute(xZones.head, {yZones.head.first, yZones.tail.first}, x);
   }
   if (xZones.middle && x == *(xZones.middle)) {
     // middle point in x correponds to the middle point in y (or an
@@ -99,7 +99,7 @@ int compute(const std::pair<int, int> xRange, const std::pair<int, int> yRange,
 
   // x in the tail of the x range corresponds to a value for y in the tail of
   // the y range
-  return compute(xZones.tail, yZones.tail, x);
+  return compute(xZones.tail, {yZones.head.second, yZones.tail.second}, x);
 }
 
 template <typename C> C ramp(C first, C last, int total, int coordinate) {
