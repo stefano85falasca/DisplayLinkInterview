@@ -24,7 +24,7 @@ struct ParametersGrammar
     number_ = lexeme[(lit("0X") | lit("0x")) >>
                      boost::spirit::qi::uint_parser<uint16_t, 16>{}] |
               boost::spirit::qi::uint_parser<uint16_t>{};
-    corners_ = (number_ >> number_ >> -number_ >> -number_) >> eoi;
+    corners_ = (number_ >> number_ >> -number_ >> -number_);
     params_ = lexeme[+(char_ - boost::spirit::ascii::space_type{})] >>
               corners_ >> eoi;
   }
