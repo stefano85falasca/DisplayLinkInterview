@@ -102,6 +102,8 @@ add_custom_target( clangformat COMMAND /usr/bin/clang-format -i ${ALL_SOURCE_FIL
 enable_testing()
 add_subdirectory(libs/googletest)
 
+include_directories(libs/spirit/include)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 IF(PEDANTIC MATCHES True)
