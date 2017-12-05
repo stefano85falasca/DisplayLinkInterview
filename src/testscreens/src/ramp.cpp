@@ -1,11 +1,8 @@
 #include "testscreens/ramp.h"
 #include "common/assert.h"
-#include <array>
-#include <boost/optional.hpp>
-#include <iostream>
-#include <limits>
 #include <cmath>
 #include <utility>
+#include <vector>
 
 namespace {
 /*
