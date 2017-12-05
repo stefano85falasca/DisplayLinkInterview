@@ -4,7 +4,7 @@
 #include <boost/optional.hpp>
 #include <iostream>
 #include <limits>
-#include <math.h>
+#include <cmath>
 #include <utility>
 
 namespace {
