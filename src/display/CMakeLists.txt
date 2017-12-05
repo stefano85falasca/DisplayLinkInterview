@@ -17,11 +17,3 @@ install(TARGETS display
 install(DIRECTORY include/ DESTINATION include)
 
 export(TARGETS display FILE TslibLibraryConfig.cmake)
-
-add_executable(testdisplay test/main.cpp)
-add_sanitizers(testdisplay)
-
-target_include_directories(testdisplay PRIVATE $gtest_SOURCWE_DIR/include)
-target_link_libraries(testdisplay display common gtest)
-
-add_test(testdisplay testdisplay)

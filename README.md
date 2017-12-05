@@ -14,10 +14,9 @@ Usage
 
 Testing
 ======
-Several test programs are generated during build
+Two test programs are generated during build
 * testcommonlib
 * testtslib
-* testcommon
 
 Normal defensive programming techniques have been used throughout.
 
