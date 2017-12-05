@@ -112,7 +112,7 @@ int main(int ac, const char *av[]) {
       // std::cout << TestScreens::RGB565(0x0) << std::endl;
     }
 
-    return 1;
+    return 0;
   } catch (std::runtime_error &e) {
     std::cout << e.what() << std::endl;
     help();
@@ -120,5 +120,5 @@ int main(int ac, const char *av[]) {
     std::cout << "An unhandled error occurred:\n\t" << e.what()
               << "\nterminating" << std::endl;
   }
-  return 0;
+  return 1;
 }
