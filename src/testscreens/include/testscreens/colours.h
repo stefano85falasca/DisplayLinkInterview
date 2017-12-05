@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <stdint.h>
 
 namespace TestScreens {
@@ -28,6 +27,4 @@ struct RGB565 {
   Blue blue() const;
   uint16_t value;
 };
-
-std::ostream &operator<<(std::ostream &, RGB565);
 }

@@ -1,5 +1,6 @@
 #include "common/assert.h"
 #include "testscreens/colours.h"
+#include "testscreens/coloursio.h"
 #include "testscreens/ramp.h"
 #include <boost/fusion/adapted/std_tuple.hpp>
 #include <boost/spirit/home/qi.hpp>

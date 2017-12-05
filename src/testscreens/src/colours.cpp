@@ -1,5 +1,6 @@
 #include "testscreens/colours.h"
 #include "common/assert.h"
+#include "testscreens/coloursio.h"
 #include <limits>
 
 namespace TestScreens {
