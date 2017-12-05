@@ -84,10 +84,10 @@ int main(int ac, const char *av[]) {
     const auto size =
         std::pair<uint16_t, uint16_t>{parsedParameters[0], parsedParameters[1]};
 
-    for (auto y = 0; y < size.second; ++y) {
+    for (auto y = 0u; y < size.second; ++y) {
       const auto l = TestScreens::ramp(tl, bl, size.second, y);
       const auto r = TestScreens::ramp(tr, br, size.second, y);
-      for (auto x = 0; x < size.first; ++x) {
+      for (auto x = 0u; x < size.first; ++x) {
         std::cout << TestScreens::ramp(l, r, size.first, x);
       }
       std::cout << TestScreens::RGB565(0x0) << std::endl;
