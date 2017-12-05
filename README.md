@@ -24,8 +24,7 @@ Assertions are used to perform sanity checking of the computations at various st
 
 Modules
 ======
-This is a contrived example that maybe didn't need dividing in modules, but I did.
-
+This is a contrived example that maybe didn't need dividing in modules, but I did divide it into:
 * display - library providing the Display class
 * common - library providing assertions
 * testscreens - library providing the ramp generation facilities
