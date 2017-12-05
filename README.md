@@ -29,3 +29,4 @@ This is a contrived example that maybe didn't need dividing in modules, but I di
 * common - library providing assertions
 * testscreens - library providing the ramp generation facilities
 * ramp - executable
+* truecolor - executable to pretty-print a ramp on a true-color compatible terminal
